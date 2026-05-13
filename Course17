@@ -1,1 +1,34 @@
-.
+--This project contains a car database with information such as model, manufacturer, production year, and more.
+--It also includes several problem-solving exercises and queries performed on the database using SQL.
+
+--Problem 1 :Create view to show the details of the foreign key columns 
+ create view VehicleMasterDetails as select VehicleDetails.ID,VehicleDetails.MakeID,Makes.Make,VehicleDetails.ModelID,
+	MakeModels.ModelName,VehicleDetails.SubModelID,SubModels.SubModelName,VehicleDetails.BodyID,Bodies.BodyName,
+	VehicleDetails.Vehicle_Display_Name,VehicleDetails.Year,VehicleDetails.DriveTypeID,DriveTypes.DriveTypeName,
+	VehicleDetails.Engine,VehicleDetails.Engine_CC,VehicleDetails.Engine_Cylinders,VehicleDetails.Engine_Liter_Display,
+	VehicleDetails.FuelTypeID,FuelTypes.FuelTypeName,VehicleDetails.NumDoors
+	from VehicleDetails join Makes on VehicleDetails.MakeID=Makes.MakeID
+	left join MakeModels on VehicleDetails.ModelID=MakeModels.ModelID
+	left join SubModels on VehicleDetails.SubModelID= SubModels.SubModelID  
+	left join Bodies on VehicleDetails.BodyID= Bodies.BodyID
+	left join DriveTypes on VehicleDetails.DriveTypeID=DriveTypes.DriveTypeID
+	left join FuelTypes on VehicleDetails.FuelTypeID=FuelTypes.FuelTypeID;
+	
+	--Problem 2: Get all vehicles made between 1950 and 2000
+	select * from VehicleMasterDetails where Year between 1950 and 2000;
+
+  --Problem 3: Get number vehicles made between 1950 and 2000
+	select count(*) as NumberOfVehicles from VehicleMasterDetails 
+	where Year between 1950 and 2000 ;
+
+  --Problem 4: Get number vehicles made between 1950 and 2000 by make and order them by number of vehicles descending
+	select Make,count(*) as NumberOfVehicles from VehicleMasterDetails 
+	where Year between 1950 and 2000  group by make order by NumberOfVehicles desc;
+  --Or
+  select Makes.Make,count(*) as NumberOfVehicles 
+	from  VehicleDetails join Makes on VehicleDetails.MakeID=Makes.MakeID
+	where Year between 1950 and 2000  group by Make order by NumberOfVehicles desc;
+
+--Problem 5: 
+
+
