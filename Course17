@@ -124,3 +124,10 @@
 	group by  DriveTypes.DriveTypeName,Make
 	order by Make, TotalNumberOfVehicles desc;
 
+-- Problem 19: Get total vehicles per DriveTypeName Per Make then filter only results with total > 10,000
+	select Makes.Make,DriveTypes.DriveTypeName,count(*) as TotalNumberOfVehicles
+	from VehicleDetails 
+	join Makes on VehicleDetails.MakeID=Makes.MakeID
+	join DriveTypes on VehicleDetails.DriveTypeID=DriveTypes.DriveTypeID
+	group by  DriveTypes.DriveTypeName,Make having count(*)>10000 
+	order by Make, TotalNumberOfVehicles desc;
