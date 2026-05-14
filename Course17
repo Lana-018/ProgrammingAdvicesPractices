@@ -82,3 +82,16 @@
 	join  FuelTypes on VehicleDetails.FuelTypeID=FuelTypes.FuelTypeID
 	join  Makes on VehicleDetails.MakeID=Makes.MakeID
 	where FuelTypeName= N'Gas') as Result;
+
+-- Problem 12: Count Vehicles by make and order them by NumberOfVehicles from high to low
+	select Makes.Make ,count(*) as NumberOfVehicles 
+	from VehicleDetails 
+	join  Makes on VehicleDetails.MakeID=Makes.MakeID
+	group by Make order by NumberOfVehicles Desc;
+
+-- Problem 13: Get all Makes/Count Of Vehicles that manufactures more than 20K Vehicles
+	select  Makes.Make ,count(*) as NumberOfVehicles 
+	from VehicleDetails 
+	join  Makes on VehicleDetails.MakeID=Makes.MakeID
+	group by Make having count(*)>20000 
+	order by NumberOfVehicles Desc;
