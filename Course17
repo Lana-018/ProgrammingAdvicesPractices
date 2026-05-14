@@ -117,4 +117,10 @@
 	where DriveTypeName like 'FWD') as Result ;
 
 -- Problem 18: Get total vehicles per DriveTypeName Per Make and order them per make asc then per total Desc
-   
+   	select Makes.Make,DriveTypes.DriveTypeName,count(*) as TotalNumberOfVehicles
+	from VehicleDetails 
+	join Makes on VehicleDetails.MakeID=Makes.MakeID
+	join DriveTypes on VehicleDetails.DriveTypeID=DriveTypes.DriveTypeID
+	group by  DriveTypes.DriveTypeName,Make
+	order by Make, TotalNumberOfVehicles desc;
+
