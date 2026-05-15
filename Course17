@@ -163,3 +163,25 @@
     select VehicleDetails.*,Make from VehicleDetails 
 	join Makes on VehicleDetails.MakeID=Makes.MakeID
 	where Engine like '%OHV%' and VehicleDetails.Engine_Cylinders=4;
+
+-- Problem 26: Get all vehicles that their body is 'Sport Utility' and Year > 2020
+	select VehicleDetails.*, Bodies.BodyName 
+	from VehicleDetails join Bodies on VehicleDetails.BodyID=Bodies.BodyID
+	where BodyName='Sport Utility' and Year>2020; 
+
+-- Problem 27: Get all vehicles that their Body is 'Coupe' or 'Hatchback' or 'Sedan'
+    select VehicleDetails.*, Bodies.BodyName 
+	from VehicleDetails join Bodies on VehicleDetails.BodyID=Bodies.BodyID
+	where BodyName in ('Coupe','Hatchback','Sedan') order by BodyName; 
+
+-- Problem 28: Get all vehicles that their body is 'Coupe' or 'Hatchback' or 'Sedan' and manufactured in year 2008 or 2020 or 2021
+    select VehicleDetails.*, Bodies.BodyName 
+	from VehicleDetails join Bodies on VehicleDetails.BodyID=Bodies.BodyID
+	where BodyName in ('Coupe','Hatchback','Sedan')
+	and Year in(2008,2020,2021) order by Year,BodyName;
+
+-- Problem 29: Return found=1 if there is any vehicle made in year 1950
+    select Found=1 where exists (select R=1 from VehicleDetails where Year=1950)
+
+-- Problem 30: Get all Vehicle_Display_Name, NumDoors and add extra column to describe number of doors by words, and if door is null display 'Not Set'
+    
