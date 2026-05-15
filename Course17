@@ -184,4 +184,19 @@
     select Found=1 where exists (select R=1 from VehicleDetails where Year=1950)
 
 -- Problem 30: Get all Vehicle_Display_Name, NumDoors and add extra column to describe number of doors by words, and if door is null display 'Not Set'
-    
+    select Vehicle_Display_Name,NumDoors,DoorDescription=
+	case
+	when NumDoors= 0 then 'Zero'
+	when NumDoors= 1 then 'One'
+	when NumDoors= 2 then 'Two'
+	when NumDoors= 3 then 'Three'
+	when NumDoors= 4 then 'Four'
+	when NumDoors= 5 then 'Five'
+	when NumDoors= 6 then 'Six'
+	when NumDoors= 8 then 'Eight'
+	when  NumDoors is null then 'Not Set'
+	else 'Unknown' 
+	End
+	from VehicleDetails order by NumDoors;
+
+-- Problem 31: Get all Vehicle_Display_Name, year and add extra column to calculate the age of the car then sort the results by age desc.
