@@ -131,3 +131,35 @@
 	join DriveTypes on VehicleDetails.DriveTypeID=DriveTypes.DriveTypeID
 	group by  DriveTypes.DriveTypeName,Make having count(*)>10000 
 	order by Make, TotalNumberOfVehicles desc;
+
+-- Problem 20: Get all Vehicles that number of doors is not specified
+    select * from VehicleDetails where NumDoors is null;
+
+--  Problem 21: Get Total Vehicles that number of doors is not specified
+     select count(*) as TotalWithNoSpecifiedDoors from VehicleDetails where NumDoors is null;
+
+-- Problem 22: Get percentage of vehicles that has no doors specified
+    select cast(count(*) as float)/(select count(*) from VehicleDetails) *100
+	as PercentageOfNoDoorsSpecified from VehicleDetails 
+	where NumDoors is null;
+
+-- Problem 23: Get MakeID , Make, SubModelName for all vehicles that have SubModelName 'Elite'
+    select distinct VehicleDetails.MakeID , Makes.Make, SubModels.SubModelName
+	from VehicleDetails
+	join SubModels on VehicleDetails.SubModelID=SubModels.SubModelID
+	join Makes on VehicleDetails.MakeID=Makes.MakeID
+	where SubModels.SubModelName ='Elite';
+-- Or
+   select distinct Makes.*, SubModels.SubModelName
+	from Makes
+	join MakeModels on Makes.MakeID=MakeModels.MakeID
+	join SubModels on  SubModels.ModelID=MakeModels.ModelID
+	where SubModels.SubModelName ='Elite';
+
+-- Problem 24: Get all vehicles that have Engines > 3 Liters and have only 2 doors
+	select * from VehicleDetails where Engine_Liter_Display >3 and NumDoors=2;
+
+-- Problem 25: Get make and vehicles that the engine contains 'OHV' and have Cylinders = 4
+    select VehicleDetails.*,Make from VehicleDetails 
+	join Makes on VehicleDetails.MakeID=Makes.MakeID
+	where Engine like '%OHV%' and VehicleDetails.Engine_Cylinders=4;
