@@ -200,3 +200,18 @@
 	from VehicleDetails order by NumDoors;
 
 -- Problem 31: Get all Vehicle_Display_Name, year and add extra column to calculate the age of the car then sort the results by age desc.
+    select Vehicle_Display_Name,Year ,Year(getdate())-Year as VehicleAge 
+	from VehicleDetails order by VehicleAge Desc;
+
+-- Problem 32: Get all Vehicle_Display_Name, year, Age for vehicles that their age between 15 and 25 years old
+    select * from(
+	select Vehicle_Display_Name,Year ,Year(getdate())-Year as VehicleAge 
+	from VehicleDetails) as Result where VehicleAge between 15 and 25
+	order by VehicleAge Desc;
+
+--  Problem 33: Get Minimum Engine CC , Maximum Engine CC , and Average Engine CC of all Vehicles
+  	 select Min(Engine_CC) as [Minimum Engine_CC],Max(Engine_CC) as [Maximum Engine_CC]
+	,avg(Engine_CC) as [Avearge Engine_CC] from VehicleDetails;
+
+-- Problem 34: Get all vehicles that have the minimum Engine_CC
+    select * from VehicleDetails where Engine_CC= (select Min(Engine_CC) from VehicleDetails);
