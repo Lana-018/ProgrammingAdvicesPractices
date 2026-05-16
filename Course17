@@ -273,5 +273,32 @@
 	from MakeModels join Makes on MakeModels.MakeID=Makes.MakeID
 	group by Make order by NumberOfModels Desc;
 
---
+-- Problem 46: Get the highest 3 manufacturers that make the highest number of models
+    select Make,count(*) as NumberOfModels 
+    from MakeModels join Makes on MakeModels.MakeID=Makes.MakeID
+	group by Make having count(ModelID) in(select distinct top 3 count(ModelID) as NumberOfModels 
+    from MakeModels join Makes on MakeModels.MakeID=Makes.MakeID
+	group by Make order by NumberOfModels Desc)  ;
+
+-- Problem 47: Get the highest number of models manufactured
+    select top 1 count(*) as NumberOfModels from MakeModels group by MakeID 
+	order by NumberOfModels desc;
+
+-- Problem 48: Get the highest Manufacturers manufactured the highest number of models
+    select Make,count(*) as NumberOfModels 
+    from MakeModels join Makes on MakeModels.MakeID=Makes.MakeID
+	group by Make having count(*) in(select top 1 count(*) 
+    from MakeModels group by MakeID order by count(*) desc) ;
+
+-- Problem 49: Get the Lowest Manufacturers manufactured the lowest number of models
+    select  Make,count(*) as NumberOfModels 
+    from MakeModels join Makes on MakeModels.MakeID=Makes.MakeID
+	group by Make having count(*) in(select top 1 count(*) 
+    from MakeModels group by MakeID order by count(*) asc) ;
+
+-- Problem 50: Get all Fuel Types , each time the result should be showed in random order
+    select FuelTypeName from FuelTypes order by newid();
+
+
+
 
