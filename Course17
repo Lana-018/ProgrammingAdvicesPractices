@@ -299,6 +299,17 @@
 -- Problem 50: Get all Fuel Types , each time the result should be showed in random order
     select FuelTypeName from FuelTypes order by newid();
 
+-- Problem 51: Get all employees that have manager along with Manager's name.
+    select Employees.EmployeeID, Employees.Name,
+	Employees.ManagerID,Employees.Salary ,Managers.Name as ManagerName 
+	from Employees join Employees as Managers 
+	on Employees.ManagerID=Managers.EmployeeID;
+
+-- Problem 52: Get all employees that have manager or does not have manager along with Manager's name, incase no manager name show null
+    select Employees.EmployeeID, Employees.Name,
+	Employees.ManagerID,Employees.Salary ,Managers.Name as ManagerName 
+	from Employees left join Employees as Managers 
+	on Employees.ManagerID=Managers.EmployeeID;
 
 
 
