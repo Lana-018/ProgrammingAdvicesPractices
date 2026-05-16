@@ -215,3 +215,63 @@
 
 -- Problem 34: Get all vehicles that have the minimum Engine_CC
     select * from VehicleDetails where Engine_CC= (select Min(Engine_CC) from VehicleDetails);
+
+--  Problem 35: Get all vehicles that have the Maximum Engine_CC
+     select * from VehicleDetails where Engine_CC= (select Max(Engine_CC) from VehicleDetails);
+
+-- Problem 36: Get all vehicles that have Engin_CC below average
+    select * from VehicleDetails where Engine_CC < (select Avg(Engine_CC) from VehicleDetails)
+	order by Engine_CC Desc;
+
+-- Problem 37: Get total vehicles that have Engin_CC above average
+    select count(*) as TotalVehiclesWithEngine_CCAboveAVG  from VehicleDetails 
+	where Engine_CC > (select Avg(Engine_CC) from VehicleDetails);
+
+-- Problem 38: Get all unique Engin_CC and sort them Desc
+    select distinct Engine_CC from VehicleDetails order by Engine_CC Desc;
+
+-- Problem 39: Get the maximum 3 Engine CC
+    select distinct top 3 Engine_CC from VehicleDetails order by Engine_CC desc ;
+
+-- Problem 40: Get all vehicles that has one of the Max 3 Engine CC
+    select * from VehicleDetails where Engine_CC 
+	in(select distinct top 3 Engine_CC from VehicleDetails order by Engine_CC desc)
+	order by Engine_CC desc;
+
+-- Problem 41: Get all Makes that manufactures one of the Max 3 Engine CC
+    select distinct Makes.Make from VehicleDetails
+	join Makes on VehicleDetails.MakeID=Makes.MakeID
+	where Engine_CC 
+	in(select distinct top 3 Engine_CC from VehicleDetails order by Engine_CC desc)
+	order by Make;
+
+-- Problem 42: Get a table of unique Engine_CC and calculate tax per Engine CC
+    select distinct Engine_CC,Tax=
+	Case 
+	when Engine_CC between 0 and 1000 then 100
+	when Engine_CC between 1001 and 2000 then 200
+	when Engine_CC between 2001 and 4000 then 300
+	when Engine_CC between 4001 and 6000 then 400
+	when Engine_CC between 6001 and 8000 then 500
+	when Engine_CC >8000 then 600
+	else 0
+	end
+	from  VehicleDetails order by Engine_CC;
+
+-- Problem 43: Get Make and Total Number Of Doors Manufactured Per Make
+  	select Makes.Make,sum(VehicleDetails.NumDoors) as TotalNumOfDoors from VehicleDetails 
+	join Makes on VehicleDetails.MakeID=Makes.MakeID
+	where NumDoors is not null group by Make order by TotalNumOfDoors Desc;
+
+-- Problem 44: Get Total Number Of Doors Manufactured by 'Ford'
+    select Makes.Make,sum(VehicleDetails.NumDoors) as TotalNumOfDoors from VehicleDetails 
+	join Makes on VehicleDetails.MakeID=Makes.MakeID
+	where Make='Ford' group by Make;
+
+-- Problem 45: Get Number of Models Per Make
+    select Make,count(ModelID) as NumberOfModels 
+	from MakeModels join Makes on MakeModels.MakeID=Makes.MakeID
+	group by Make order by NumberOfModels Desc;
+
+--
+
