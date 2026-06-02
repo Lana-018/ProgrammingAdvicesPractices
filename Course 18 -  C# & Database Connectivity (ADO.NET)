@@ -1,3 +1,8 @@
+/* 
+This C# program demonstrates how to perform various database operations on a Contacts table using ADO.NET 
+and SQL Server. It establishes a connection to the ContactsDB database through a SQL connection string and uses
+parameterized queries to interact with the database securely.*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
