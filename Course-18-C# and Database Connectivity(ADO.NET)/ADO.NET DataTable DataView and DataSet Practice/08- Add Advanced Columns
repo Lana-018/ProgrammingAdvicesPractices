@@ -1,0 +1,28 @@
+            DataColumn dCol1 = new DataColumn();
+            dCol1.ColumnName = "CountryID";
+            dCol1.DataType = typeof(int);
+            dCol1.AutoIncrement = true;
+            dCol1.AutoIncrementSeed = 1;
+            dCol1.AutoIncrementStep = 1;
+
+            DataColumn dCol2 = new DataColumn();
+            dCol2.ColumnName = "CountryName";
+            dCol2.DataType = typeof(string);
+            dCol2.Unique = true;
+
+            DataTable dtCountries = new DataTable("dtCountries");
+            dtCountries.Columns.Add(dCol1);
+            dtCountries.Columns.Add(dCol2);
+
+            dtCountries.Rows.Add(null, "USA");
+            dtCountries.Rows.Add(null, "Jordan");
+            dtCountries.Rows.Add(3, "Qatar");
+
+            DataColumn[] DC = new DataColumn[1];
+            DC[0] = dtCountries.Columns["CountryID"];
+            dtCountries.PrimaryKey = DC;
+
+            foreach(DataRow row in dtCountries.Rows)
+            {
+                Console.WriteLine($"Country ID:{row["CountryID"]},Name:{row["CountryName"]}");
+            }
