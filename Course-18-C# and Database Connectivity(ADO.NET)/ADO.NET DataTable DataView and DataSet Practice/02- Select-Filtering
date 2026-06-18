@@ -1,1 +1,20 @@
-.
+
+DataTable dt = new DataTable();
+
+dt.Columns.Add("ID", typeof(int));
+dt.Columns.Add("FirstName", typeof(string));
+dt.Columns.Add("LastName", typeof(string));
+dt.Columns.Add("Age", typeof(int));
+
+dt.Rows.Add(1, "Sama", "Isam", 26);
+dt.Rows.Add(2, "Hamed", "Abusamaha", 25);
+dt.Rows.Add(3, "Laith", "Khalil", 15);
+dt.Rows.Add(4, "Sara", "Salem", 18);
+dt.Rows.Add(5, "Ramzi", "Khawaldeh", 45);
+
+DataRow[] ResultRows = dt.Select("Age>18");
+ foreach (DataRow row in ResultRows)
+ {
+     Console.WriteLine(row["ID"].ToString().PadRight(10) + row["FirstName"].ToString().PadRight(10) + row["Age"].ToString());
+ }
+
