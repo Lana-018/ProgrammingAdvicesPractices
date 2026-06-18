@@ -1,0 +1,32 @@
+DataTable dt = new DataTable();
+
+dt.Columns.Add("ID", typeof(int));
+dt.Columns.Add("FirstName", typeof(string));
+dt.Columns.Add("LastName", typeof(string));
+dt.Columns.Add("Age", typeof(int));
+
+dt.Rows.Add(1, "Sama", "Isam", 26);
+dt.Rows.Add(2, "Hamed", "Abusamaha", 25);
+dt.Rows.Add(3, "Laith", "Khalil", 15);
+dt.Rows.Add(4, "Sara", "Salem", 18);
+dt.Rows.Add(5, "Ramzi", "Khawaldeh", 45);
+
+//Data before deletion
+foreach (DataRow row in dt.Rows)
+{
+    Console.WriteLine(row["ID"].ToString().PadRight(10) + row["FirstName"].ToString().PadRight(10) + row["Age"].ToString());
+}
+
+DataRow[] result = dt.Select("ID=4");
+foreach (DataRow row in result)
+{
+    row.Delete();
+}
+//Data after deletion
+ Console.WriteLine("__________________________________________");
+ Console.WriteLine("After deletion");
+ Console.WriteLine("__________________________________________");
+foreach (DataRow row in dt.Rows)
+{
+    Console.WriteLine(row["ID"].ToString().PadRight(10) + row["FirstName"].ToString().PadRight(10) + row["Age"].ToString());
+}
