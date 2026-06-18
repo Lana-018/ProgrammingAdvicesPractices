@@ -4,11 +4,11 @@ dt.Columns.Add("FirstName", typeof(string));
 dt.Columns.Add("LastName", typeof(string));
 dt.Columns.Add("Age", typeof(byte));
 
-dt.Rows.Add(1,"Sama","Isam","26");
-dt.Rows.Add(2, "Hamed", "Abusamaha", "25");
-dt.Rows.Add(3, "Laith", "Rafat", "15");
-dt.Rows.Add(3, "Tamara", "Tarawneh", "18");
-dt.Rows.Add(3, "Ramzi", "Moqbel", "43");
+dt.Rows.Add(1, "Sama", "Isam", 26);
+dt.Rows.Add(2, "Hamed", "Abusamaha", 25);
+dt.Rows.Add(3, "Laith", "Khalil", 15);
+dt.Rows.Add(4, "Sara", "Salem", 18);
+dt.Rows.Add(5, "Ramzi", "Khawaldeh", 45);
 
 Console.WriteLine("ID    First Name         Last Name       Age");
           
