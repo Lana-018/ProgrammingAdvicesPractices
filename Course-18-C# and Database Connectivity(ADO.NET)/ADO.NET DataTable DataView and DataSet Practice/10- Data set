@@ -1,13 +1,51 @@
+DataColumn dCol1 = new DataColumn();
+dCol1.ColumnName = "CountryID";
+dCol1.DataType = typeof(int);
+dCol1.AutoIncrement = true;
+dCol1.AutoIncrementSeed = 1;
+dCol1.AutoIncrementStep = 1;
+
+DataColumn dCol2 = new DataColumn();
+dCol2.ColumnName = "CountryName";
+dCol2.DataType = typeof(string);
+dCol2.Unique = true;
+
+DataTable dtCountries = new DataTable("dtCountries");
+dtCountries.Columns.Add(dCol1);
+dtCountries.Columns.Add(dCol2);
+
+dtCountries.Rows.Add(null, "USA");
+dtCountries.Rows.Add(null, "Jordan");
+dtCountries.Rows.Add(3, "Qatar");
+
+DataColumn[] DC = new DataColumn[1];
+DC[0] = dtCountries.Columns["CountryID"];
+dtCountries.PrimaryKey = DC;
+
+DataTable dt = new DataTable("dt");
+
+dt.Columns.Add("ID", typeof(int));
+dt.Columns.Add("FirstName", typeof(string));
+dt.Columns.Add("LastName", typeof(string));
+dt.Columns.Add("Age", typeof(int));
+
+dt.Rows.Add(1, "Sama", "Isam", 26);
+dt.Rows.Add(2, "Hamed", "Abusamaha", 25);
+dt.Rows.Add(3, "Laith", "Khalil", 15);
+dt.Rows.Add(4, "Sara", "Salem", 18);
+dt.Rows.Add(5, "Ramzi", "Khawaldeh", 45);
+
 DataSet ds = new DataSet();
 ds.Tables.Add(dt);
 ds.Tables.Add(dtCountries);
 
-//show persons table contents
+//Access data by table index
+//show persons table (dt) contents
 foreach(DataRow row in ds.Tables[0].Rows)
 {
     Console.WriteLine($"ID:{row["ID"]},FirstName:{row["FirstName"]},Age:{row["Age"]}");
 }
-//show Countries table contents
+//show Countries table (dtCountries) contents
 foreach (DataRow row in ds.Tables[1].Rows)
 {
     Console.WriteLine($"Country ID:{row["CountryID"]},Country Name:{row["CountryName"]}");
