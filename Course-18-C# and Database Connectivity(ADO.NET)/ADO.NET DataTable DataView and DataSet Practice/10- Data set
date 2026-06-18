@@ -1,0 +1,24 @@
+DataSet ds = new DataSet();
+ds.Tables.Add(dt);
+ds.Tables.Add(dtCountries);
+
+//show persons table contents
+foreach(DataRow row in ds.Tables[0].Rows)
+{
+    Console.WriteLine($"ID:{row["ID"]},FirstName:{row["FirstName"]},Age:{row["Age"]}");
+}
+//show Countries table contents
+foreach (DataRow row in ds.Tables[1].Rows)
+{
+    Console.WriteLine($"Country ID:{row["CountryID"]},Country Name:{row["CountryName"]}");
+}
+// To access data by table name
+Console.WriteLine("--------------------------------------------------");
+foreach (DataRow row in ds.Tables["dt"].Rows)
+{
+    Console.WriteLine($"ID:{row["ID"]},FirstName:{row["FirstName"]},Age:{row["Age"]}");
+}
+foreach (DataRow row in ds.Tables["dtCountries"].Rows)
+{
+    Console.WriteLine($"Country ID:{row["CountryID"]},Country Name:{row["CountryName"]}");
+}
